@@ -7,17 +7,30 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
+    - name: Debug - List all files
+      run: |
+        echo "=== 当前目录 ==="
+        pwd
+        echo "=== 列出所有文件 ==="
+        find . -type f \( -name "*.java" -o -name "*.xml" -o -name "*.yml" \) | sort
+        echo "=== lab4/pom.xml 是否存在？ ==="
+        if [ -f lab4/pom.xml ]; then
+          echo "lab4/pom.xml 存在"
+          head -10 lab4/pom.xml
+        else
+          echo "lab4/pom.xml 不存在！"
+        fi
+    
     - name: Set up JDK 21
       uses: actions/setup-java@v4
       with:
         java-version: '21'
         distribution: 'temurin'
     
-    - name: Verify Java version
-      run: java --version
-    
     - name: Build with Maven
+      working-directory: ./lab4  
       run: mvn -B compile
     
     - name: Run tests with Maven
+      working-directory: ./lab4  
       run: mvn -B test
