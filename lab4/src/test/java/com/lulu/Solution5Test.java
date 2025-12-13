@@ -60,7 +60,7 @@ public class Solution5Test {
         Solution5 solution = new Solution5();
         int[] nums = {10, 10, 10, 10};
         int target = 5;
-        int expected = 999;
+        int expected = 0;
         int result = solution.numSubseq(nums, target);
         assertEquals(expected, result);
     }
